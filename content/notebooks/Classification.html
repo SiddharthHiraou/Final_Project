@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Required File and modules Import &#8212; Income Classification</title>
+    <title>Classification &#8212; Income Classification</title>
   
   
   
@@ -61,11 +61,11 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/Classification';</script>
-    <link rel="canonical" href="/Mood_classification_book/content/notebooks/Classification.html" />
+    <link rel="canonical" href="/Income_classification_book/content/notebooks/Classification.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="FastAPI Code" href="FastAPI.html" />
-    <link rel="prev" title="Code Files" href="../code_section.html" />
+    <link rel="prev" title="Code Section" href="../code_section.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -165,8 +165,9 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../resume.html">Resume</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../code_section.html">Code Files</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><strong>Required File and modules Import</strong></a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../code_section.html">Code Section</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><strong>Classification</strong></a></li>
+
 
 
 
@@ -198,6 +199,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../links.html">Important Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application.html">Application</a></li>
 </ul>
 
     </div>
@@ -348,7 +350,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Required File and modules Import</h1>
+    <h1>Classification</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,7 +360,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Required File and modules Import</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Classification</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#required-file-and-modules-import"><strong>Required File and modules Import</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#required-modules-install"><strong>Required Modules Install</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-data-file-load"><strong>CSV Data file Load</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-and-normalization"><strong>Data Cleaning and Normalization</strong></a></li>
@@ -397,7 +400,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="required-file-and-modules-import">
+  <section class="tex2jax_ignore mathjax_ignore" id="classification">
+<h1><strong>Classification</strong><a class="headerlink" href="#classification" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="required-file-and-modules-import">
 <h1><strong>Required File and modules Import</strong><a class="headerlink" href="#required-file-and-modules-import" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -854,7 +860,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "957648dbe7324ac68834d85eeb1f2c68"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "94593b0d3a1a4d9283e7b43b3b0277ff"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7194ed40e1b942cfb435eaf5bde97118"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8176a47d9c3f4c8ba1c3dd744e23f42c"}</script><div class="output text_html"><iframe width="100%" height="800px" srcdoc="&lt;!doctype html&gt;&lt;html lang=en&gt;&lt;head&gt;&lt;meta charset=utf-8&gt;&lt;meta name=viewport content=&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;&gt;&lt;meta name=description content=&quot;Profile report generated by YData! Visit us at https://ydata.ai&quot;&gt;&lt;meta name=author content=&quot;YData and the open source community.&quot;&gt;&lt;meta name=generator content=&quot;YData Profiling vv4.12.1&quot;&gt;&lt;meta name=url content=https://github.com/ydataai/ydata-profiling&gt;&lt;meta name=date content=&quot;2024-12-18 01:01:58.092583&quot;&gt;&lt;title&gt;Income Evaluation Dataset EDA&lt;/title&gt;&lt;style&gt;
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "957648dbe7324ac68834d85eeb1f2c68", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "94593b0d3a1a4d9283e7b43b3b0277ff", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7194ed40e1b942cfb435eaf5bde97118", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8176a47d9c3f4c8ba1c3dd744e23f42c", "version_major": 2, "version_minor": 0}</script><div class="output text_html"><iframe width="100%" height="800px" srcdoc="&lt;!doctype html&gt;&lt;html lang=en&gt;&lt;head&gt;&lt;meta charset=utf-8&gt;&lt;meta name=viewport content=&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;&gt;&lt;meta name=description content=&quot;Profile report generated by YData! Visit us at https://ydata.ai&quot;&gt;&lt;meta name=author content=&quot;YData and the open source community.&quot;&gt;&lt;meta name=generator content=&quot;YData Profiling vv4.12.1&quot;&gt;&lt;meta name=url content=https://github.com/ydataai/ydata-profiling&gt;&lt;meta name=date content=&quot;2024-12-18 01:01:58.092583&quot;&gt;&lt;title&gt;Income Evaluation Dataset EDA&lt;/title&gt;&lt;style&gt;
 @charset &quot;UTF-8&quot;;/*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
  * Copyright 2011-2024 The Bootstrap Authors
@@ -34657,7 +34663,7 @@ Confusion Matrix:
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Code Files</p>
+        <p class="prev-next-title">Code Section</p>
       </div>
     </a>
     <a class="right-next"
@@ -34686,7 +34692,8 @@ Confusion Matrix:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Required File and modules Import</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Classification</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#required-file-and-modules-import"><strong>Required File and modules Import</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#required-modules-install"><strong>Required Modules Install</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-data-file-load"><strong>CSV Data file Load</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-and-normalization"><strong>Data Cleaning and Normalization</strong></a></li>
