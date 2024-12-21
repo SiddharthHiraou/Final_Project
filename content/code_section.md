@@ -1,4 +1,4 @@
-# Code Files
+# Code Section
 
 This section contains all the code files used in the project, including Jupyter notebooks and Python scripts.
 
@@ -7,8 +7,5 @@ This section contains all the code files used in the project, including Jupyter 
 - [YProfiling Report](code_files/data_profile_report_copy.html)
 - [FastAPI](notebooks/FastAPI.ipynb)
 - [Streamlit](notebooks/Streamlit.ipynb)
-
-
-
 
 
