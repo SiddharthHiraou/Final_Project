@@ -30,11 +30,11 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -159,39 +159,14 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    Income Classification Project
+                    Classification Project For Banking System
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../resume.html">Resume</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../code_section.html">Code Section</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Classification.html"><strong>Classification</strong></a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="final_project.html"><strong>Observations from the Correlation Matrix:</strong></a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="FastAPI.html">FastAPI Code</a></li>
@@ -367,62 +342,45 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="c1"># Streamlit app</span>
-<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Income Classification App&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bank Marketing Prediction&#39;</span><span class="p">)</span>
 
-<span class="c1"># User input form</span>
-<span class="n">st</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">&quot;Enter your details:&quot;</span><span class="p">)</span>
-<span class="n">age</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">hours_per_week</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Hours per Week&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-<span class="n">education_num</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">&quot;Education Number&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">capital_gain</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Capital Gain&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">capital_loss</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Capital Loss&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">fnlwgt</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Fnlwgt (Final Weight)&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
-<span class="n">sex</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">])</span>
-<span class="n">relationship</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Relationship&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Wife&#39;</span><span class="p">,</span> <span class="s1">&#39;Own-child&#39;</span><span class="p">,</span> <span class="s1">&#39;Husband&#39;</span><span class="p">,</span> <span class="s1">&#39;Not-in-family&#39;</span><span class="p">,</span> <span class="s1">&#39;Other-relative&#39;</span><span class="p">,</span> <span class="s1">&#39;Unmarried&#39;</span><span class="p">])</span>
-<span class="n">workclass</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Workclass&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Private&#39;</span><span class="p">,</span> <span class="s1">&#39;Self-emp-not-inc&#39;</span><span class="p">,</span> <span class="s1">&#39;Self-emp-inc&#39;</span><span class="p">,</span> <span class="s1">&#39;Federal-gov&#39;</span><span class="p">,</span> <span class="s1">&#39;Local-gov&#39;</span><span class="p">,</span> <span class="s1">&#39;State-gov&#39;</span><span class="p">,</span> <span class="s1">&#39;Without-pay&#39;</span><span class="p">,</span> <span class="s1">&#39;Never-worked&#39;</span><span class="p">])</span>
-<span class="n">occupation</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Occupation&quot;</span><span class="p">,</span> <span class="p">[</span>
-    <span class="s1">&#39;Tech-support&#39;</span><span class="p">,</span> <span class="s1">&#39;Craft-repair&#39;</span><span class="p">,</span> <span class="s1">&#39;Other-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Exec-managerial&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Prof-specialty&#39;</span><span class="p">,</span> <span class="s1">&#39;Handlers-cleaners&#39;</span><span class="p">,</span> <span class="s1">&#39;Machine-op-inspct&#39;</span><span class="p">,</span> <span class="s1">&#39;Adm-clerical&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Farming-fishing&#39;</span><span class="p">,</span> <span class="s1">&#39;Transport-moving&#39;</span><span class="p">,</span> <span class="s1">&#39;Priv-house-serv&#39;</span><span class="p">,</span> <span class="s1">&#39;Protective-serv&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Armed-Forces&#39;</span>
-<span class="p">])</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Enter customer information to predict if they will subscribe to a term deposit.&#39;</span><span class="p">)</span>
 
-<span class="c1"># Define the FastAPI endpoint URL</span>
-<span class="c1"># api_url = &quot;https://income-classifier-backend-630343362277.us-central1.run.app/predict&quot;</span>
-<span class="n">api_url</span> <span class="o">=</span> <span class="s2">&quot;http://18.222.116.60/predict&quot;</span>
-<span class="c1">#api_url = &quot;http://127.0.0.1:8000/predict&quot;</span>
+<span class="c1"># Input fields</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Job&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;admin.&#39;</span><span class="p">,</span> <span class="s1">&#39;blue-collar&#39;</span><span class="p">,</span> <span class="s1">&#39;entrepreneur&#39;</span><span class="p">,</span> <span class="s1">&#39;housemaid&#39;</span><span class="p">,</span> <span class="s1">&#39;management&#39;</span><span class="p">,</span> <span class="s1">&#39;retired&#39;</span><span class="p">,</span> <span class="s1">&#39;self-employed&#39;</span><span class="p">,</span> <span class="s1">&#39;services&#39;</span><span class="p">,</span> <span class="s1">&#39;student&#39;</span><span class="p">,</span> <span class="s1">&#39;technician&#39;</span><span class="p">,</span> <span class="s1">&#39;unemployed&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">])</span>
+<span class="n">marital</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Marital Status&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;divorced&#39;</span><span class="p">,</span> <span class="s1">&#39;married&#39;</span><span class="p">,</span> <span class="s1">&#39;single&#39;</span><span class="p">])</span>
+<span class="n">education</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">])</span>
+<span class="n">balance</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Balance&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Housing Loan&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">])</span>
+<span class="n">loan</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Personal Loan&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">])</span>
+<span class="n">contact</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Contact Method&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;cellular&#39;</span><span class="p">,</span> <span class="s1">&#39;telephone&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">])</span>
+<span class="n">day</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Day of Month&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">month</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;jan&#39;</span><span class="p">,</span> <span class="s1">&#39;feb&#39;</span><span class="p">,</span> <span class="s1">&#39;mar&#39;</span><span class="p">,</span> <span class="s1">&#39;apr&#39;</span><span class="p">,</span> <span class="s1">&#39;may&#39;</span><span class="p">,</span> <span class="s1">&#39;jun&#39;</span><span class="p">,</span> <span class="s1">&#39;jul&#39;</span><span class="p">,</span> <span class="s1">&#39;aug&#39;</span><span class="p">,</span> <span class="s1">&#39;sep&#39;</span><span class="p">,</span> <span class="s1">&#39;oct&#39;</span><span class="p">,</span> <span class="s1">&#39;nov&#39;</span><span class="p">,</span> <span class="s1">&#39;dec&#39;</span><span class="p">])</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Last Contact Duration (seconds)&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">campaign</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Number of Contacts&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pdays</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Days Since Last Contact&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">previous</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Previous Contacts&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">poutcome</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Previous Outcome&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;failure&#39;</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">])</span>
 
-
-<span class="c1"># Predict button</span>
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Predict Income&quot;</span><span class="p">):</span>
-    <span class="c1"># Prepare the input data for the API request</span>
-    <span class="n">input_data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;Age&quot;</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
-        <span class="s2">&quot;Hours_per_Week&quot;</span><span class="p">:</span> <span class="n">hours_per_week</span><span class="p">,</span>
-        <span class="s2">&quot;Education_Num&quot;</span><span class="p">:</span> <span class="n">education_num</span><span class="p">,</span>
-        <span class="s2">&quot;Capital_Gain&quot;</span><span class="p">:</span> <span class="n">capital_gain</span><span class="p">,</span>
-        <span class="s2">&quot;Capital_Loss&quot;</span><span class="p">:</span> <span class="n">capital_loss</span><span class="p">,</span>
-        <span class="s2">&quot;Fnlwgt&quot;</span><span class="p">:</span> <span class="n">fnlwgt</span><span class="p">,</span>
-        <span class="s2">&quot;Sex&quot;</span><span class="p">:</span> <span class="n">sex</span><span class="p">,</span>
-        <span class="s2">&quot;Relationship&quot;</span><span class="p">:</span> <span class="n">relationship</span><span class="p">,</span>
-        <span class="s2">&quot;Workclass&quot;</span><span class="p">:</span> <span class="n">workclass</span><span class="p">,</span>
-        <span class="s2">&quot;Occupation&quot;</span><span class="p">:</span> <span class="n">occupation</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="c1"># Make the API request</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">input_data</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="c1"># Parse the prediction result from the response</span>
-        <span class="n">prediction</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted Income: </span><span class="si">{</span><span class="n">prediction</span><span class="p">[</span><span class="s1">&#39;Predicted Income&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error in making prediction. Please check the FastAPI server.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s1">&#39;Predict&#39;</span><span class="p">):</span>
+    <span class="c1"># This is a dummy prediction. Replace with your actual model prediction.</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="s2">&quot;Subscribed&quot;</span> <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">40</span> <span class="ow">and</span> <span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">1000</span> <span class="k">else</span> <span class="s2">&quot;Not Subscribed&quot;</span>
+    
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediction: The customer will likely </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s2"> to the term deposit.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Display input data</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Input Data:&quot;</span><span class="p">)</span>
+    <span class="n">input_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;Feature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Job&#39;</span><span class="p">,</span> <span class="s1">&#39;Marital Status&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Balance&#39;</span><span class="p">,</span> <span class="s1">&#39;Housing Loan&#39;</span><span class="p">,</span> <span class="s1">&#39;Personal Loan&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;Contact Method&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Campaign&#39;</span><span class="p">,</span> <span class="s1">&#39;Days Since Last Contact&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;Previous Contacts&#39;</span><span class="p">,</span> <span class="s1">&#39;Previous Outcome&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">age</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">marital</span><span class="p">,</span> <span class="n">education</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">loan</span><span class="p">,</span> <span class="n">contact</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> 
+                  <span class="n">duration</span><span class="p">,</span> <span class="n">campaign</span><span class="p">,</span> <span class="n">pdays</span><span class="p">,</span> <span class="n">previous</span><span class="p">,</span> <span class="n">poutcome</span><span class="p">]</span>
+    <span class="p">})</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
