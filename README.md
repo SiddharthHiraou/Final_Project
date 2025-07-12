@@ -1,4 +1,4 @@
-# Customer Behavior Analysis and Deployment using Streamlit & FastAPI
+# End-to-End ML Deployment Pipeline
 
 This project showcases an end-to-end machine learning pipeline — from data analysis and model training to deployment via **Streamlit**, **FastAPI**, and **GitHub Pages**.
 
