@@ -93,8 +93,3 @@ Final_Project/
 **Siddharth Hiraou**  
 🔗 GitHub: [@SiddharthHiraou](https://github.com/SiddharthHiraou)
 
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
